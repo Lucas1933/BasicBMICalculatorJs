@@ -58,13 +58,16 @@ function crearFormulario() {
     )
   );
   let div = document.createElement("div");
-  document.body.append(
-    (div.innerText = calculadora.obtenerCalorias(
-      persona.peso,
-      persona.altura,
-      persona.edad,
-      persona.sexo,
-      persona.nivelDeActividad
-    ))
+  let p = document.createElement("p");
+  div.style.backgroundColor = "black";
+  p.innerText = calculadora.obtenerCalorias(
+    persona.peso,
+    persona.altura,
+    persona.edad,
+    persona.sexo,
+    persona.nivelDeActividad
   );
+  p.style.color = "white";
+  div.append(p);
+  document.body.append(div);
 }
