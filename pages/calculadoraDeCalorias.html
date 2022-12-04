@@ -4,35 +4,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../dist/output.css" />
-    <script defer src="../js/formScript.js"></script>
+    <script defer src="../js/calculadoraScript.js"></script>
     <title>Calculadora de calorias</title>
   </head>
   <body class="flex items-center justify-center">
-    <div class="calculadora h-auto w-5/12 border-8 border-solid border-black">
+    <div class="calculadora h-auto w-auto border-8 border-solid border-black">
       <form
         id="formulario"
         class="flex flex-col items-center justify-center"
         action=""
       >
-        <label for="peso"> Peso en Kg</label>
+        <label for="peso" class="mt-5"> Peso en Kg</label>
         <input
-          class="border-2 border-solid border-black"
+          class="w-32 border-2 border-solid border-black"
           id="peso"
           type="text"
         />
-        <label for="altura">Altura en cm</label>
+        <label for="altura" class="mt-5">Altura en cm</label>
         <input
-          class="border-2 border-solid border-black"
+          class="w-32 border-2 border-solid border-black"
           id="altura"
           type="text"
         />
-        <label for="altura">Edad</label>
+        <label for="altura" class="mt-5">Edad</label>
         <input
-          class="border-2 border-solid border-black"
+          class="w-32 border-2 border-solid border-black"
           id="edad"
           type="text"
         />
-        <p>Sexo</p>
+        <p class="mt-5">Sexo</p>
 
         <div class="flex w-32 justify-evenly">
           <label for="masculino">M</label>
@@ -40,8 +40,14 @@
           <label for="femenino">F</label>
           <input id="femenino" type="checkbox" />
         </div>
-        <label for="nivelDeActividad">Nivel de actividad</label>
-        <select id="nivelDeActividad" name="actividad" size="4" multiple>
+        <label for="nivelDeActividad" class="mt-5">Nivel de actividad</label>
+        <select
+          id="nivelDeActividad"
+          name="actividad"
+          size="4"
+          multiple
+          class=""
+        >
           <option value="1.2">Sedentario</option>
           <option value="1.375">Ejercicio ligero</option>
           <option value="1.55">Ejercicio moderado</option>
@@ -50,12 +56,13 @@
         </select>
         <button
           id="calcularBoton"
-          class="border-2 border-solid border-black"
+          class="mt-6 border-2 border-solid border-black"
           type="button"
         >
           Calcular
         </button>
       </form>
     </div>
+    <div id="resultadoDiv"><p></p></div>
   </body>
 </html>
