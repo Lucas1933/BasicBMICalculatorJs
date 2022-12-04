@@ -1,0 +1,61 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../dist/output.css" />
+    <script defer src="../js/formScript.js"></script>
+    <title>Calculadora de calorias</title>
+  </head>
+  <body class="flex items-center justify-center">
+    <div class="calculadora h-auto w-5/12 border-8 border-solid border-black">
+      <form
+        id="formulario"
+        class="flex flex-col items-center justify-center"
+        action=""
+      >
+        <label for="peso"> Peso en Kg</label>
+        <input
+          class="border-2 border-solid border-black"
+          id="peso"
+          type="text"
+        />
+        <label for="altura">Altura en cm</label>
+        <input
+          class="border-2 border-solid border-black"
+          id="altura"
+          type="text"
+        />
+        <label for="altura">Edad</label>
+        <input
+          class="border-2 border-solid border-black"
+          id="edad"
+          type="text"
+        />
+        <p>Sexo</p>
+
+        <div class="flex w-32 justify-evenly">
+          <label for="masculino">M</label>
+          <input id="masculino" type="checkbox" />
+          <label for="femenino">F</label>
+          <input id="femenino" type="checkbox" />
+        </div>
+        <label for="nivelDeActividad">Nivel de actividad</label>
+        <select id="nivelDeActividad" name="actividad" size="4" multiple>
+          <option value="1.2">Sedentario</option>
+          <option value="1.375">Ejercicio ligero</option>
+          <option value="1.55">Ejercicio moderado</option>
+          <option value="1.725">Ejercicio fuerte</option>
+          <option value="1.9">Ejercicio muy intenso</option>
+        </select>
+        <button
+          id="calcularBoton"
+          class="border-2 border-solid border-black"
+          type="button"
+        >
+          Calcular
+        </button>
+      </form>
+    </div>
+  </body>
+</html>
