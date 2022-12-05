@@ -43,23 +43,32 @@ class CalculadoraMetabolica {
   }
 }
 function appendResult(resultado) {
-  let cartelResultado = document.getElementById("resultadoDiv");
-  let resultadoText = cartelResultado.firstChild;
-  cartelResultado.style.backgroundColor = "black";
-  resultadoText.innerText = resultado;
+  let resultadoText = document.getElementById("resultadoText");
   resultadoText.style.color = "white";
-  cartelResultado.append(resultadoText);
+  resultadoText.innerText = parseInt(resultado) + " Kl";
+}
+
+function validateValues(peso, altura, edad) {
+  if (isNaN(peso) || isNaN(altura) || isNaN(edad)) {
+    document.getElementById("resultadoText").style.color = "#FF4747";
+    document.getElementById("resultadoText").innerText =
+      "Uno de los valores ingresados es invalido";
+    return false;
+  } else {
+    return true;
+  }
 }
 function main() {
   let persona = new Persona();
-  let calculadora = new CalculadoraMetabolica();
-  let resultado = calculadora.obtenerCalorias(
-    persona.peso,
-    persona.altura,
-    persona.edad,
-    persona.sexo,
-    persona.nivelDeActividad
-  );
-
-  appendResult(resultado);
+  if (validateValues(persona.peso, persona.altura, persona.edad)) {
+    let calculadora = new CalculadoraMetabolica();
+    let resultado = calculadora.obtenerCalorias(
+      persona.peso,
+      persona.altura,
+      persona.edad,
+      persona.sexo,
+      persona.nivelDeActividad
+    );
+    appendResult(resultado);
+  }
 }
