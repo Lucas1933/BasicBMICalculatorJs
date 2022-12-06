@@ -1,4 +1,5 @@
 let sexo = document.querySelectorAll("input[type=checkbox]");
+sexo[0].checked = true;
 let botonCalcular = document.getElementById("calcularBoton");
 let sexoSeleccionado;
 
@@ -45,11 +46,18 @@ class CalculadoraMetabolica {
 function appendResult(resultado) {
   let resultadoText = document.getElementById("resultadoText");
   resultadoText.style.color = "white";
-  resultadoText.innerText = parseInt(resultado) + " Kl";
+  if (!isNaN(resultado)) resultadoText.innerText = parseInt(resultado) + " Kl";
 }
 
 function validateValues(peso, altura, edad) {
-  if (isNaN(peso) || isNaN(altura) || isNaN(edad)) {
+  if (
+    isNaN(peso) ||
+    isNaN(altura) ||
+    isNaN(edad) ||
+    peso <= 0 ||
+    altura <= 0 ||
+    edad <= 0
+  ) {
     document.getElementById("resultadoText").style.color = "#FF4747";
     document.getElementById("resultadoText").innerText =
       "Uno de los valores ingresados es invalido";

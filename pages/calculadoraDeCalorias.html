@@ -11,7 +11,9 @@
     <title>Calculadora de calorias</title>
   </head>
   <body class="flex items-center justify-center">
-    <div class="calculadora h-auto w-auto border-8 border-solid border-black">
+    <div
+      class="calculadora ml-2 h-auto w-auto border-8 border-solid border-black"
+    >
       <form
         id="formulario"
         class="flex flex-col items-center justify-center"
@@ -61,13 +63,15 @@
       </form>
     </div>
     <div
-      class="ml-28 flex h-48 w-96 flex-col items-center justify-center bg-slate-500"
+      class="ml-10 mr-4 flex h-48 w-96 flex-col items-center justify-center bg-slate-500 lg:ml-28"
     >
-      <p class="inline-block text-lg font-bold text-white">
+      <p class="inline-block text-center text-sm font-bold text-white">
         Tus calorias quemadas por dia son:
       </p>
-
-      <p id="resultadoText" class="text-lg font-bold text-white"></p>
+      <p
+        id="resultadoText"
+        class="text-center text-lg font-bold text-white"
+      ></p>
     </div>
   </body>
 </html>
