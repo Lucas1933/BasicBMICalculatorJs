@@ -10,60 +10,12 @@
     <script defer src="../js/calculadoraScript.js"></script>
     <title>Calculadora de calorias</title>
   </head>
-  <body class="flex items-center justify-center">
+  <body
+    class="flex h-screen flex-col items-center justify-center overflow-x-hidden"
+  >
+    <!-- cartel del resultado -->
     <div
-      class="calculadora ml-2 h-auto w-auto border-8 border-solid border-black"
-    >
-      <form
-        id="formulario"
-        class="flex flex-col items-center justify-center"
-        action=""
-      >
-        <label for="peso" class="mt-5"> Peso en Kg</label>
-        <input
-          class="w-32 border-2 border-solid border-black"
-          id="peso"
-          type="text"
-        />
-        <label for="altura" class="mt-5">Altura en cm</label>
-        <input
-          class="w-32 border-2 border-solid border-black"
-          id="altura"
-          type="text"
-        />
-        <label for="altura" class="mt-5">Edad</label>
-        <input
-          class="w-32 border-2 border-solid border-black"
-          id="edad"
-          type="text"
-        />
-        <p class="mt-5">Sexo</p>
-
-        <div class="flex w-32 justify-evenly">
-          <label for="masculino">M</label>
-          <input id="masculino" type="checkbox" />
-          <label for="femenino">F</label>
-          <input id="femenino" type="checkbox" />
-        </div>
-        <label for="nivelDeActividad" class="mt-5">Nivel de actividad</label>
-        <select id="nivelDeActividad" name="actividad" size="4" class="">
-          <option value="1.2">Sedentario</option>
-          <option value="1.375">Ejercicio ligero</option>
-          <option value="1.55">Ejercicio moderado</option>
-          <option value="1.725">Ejercicio fuerte</option>
-          <option value="1.9">Ejercicio muy intenso</option>
-        </select>
-        <button
-          id="calcularBoton"
-          class="mt-6 border-2 border-solid border-black"
-          type="button"
-        >
-          Calcular
-        </button>
-      </form>
-    </div>
-    <div
-      class="ml-10 mr-4 flex h-48 w-96 flex-col items-center justify-center bg-slate-500 lg:ml-28"
+      class="ml-10 mr-4 flex hidden h-48 w-96 flex-col items-center justify-center bg-slate-500 lg:ml-28"
     >
       <p class="inline-block text-center text-sm font-bold text-white">
         Tus calorias quemadas por dia son:
@@ -73,5 +25,178 @@
         class="text-center text-lg font-bold text-white"
       ></p>
     </div>
+    <!-- cartel del resultado -->
+
+    <!-- calculadora -->
+
+    <div
+      id="calculadoraDiv"
+      class="calculadora mr-3 ml-3 flex w-fit justify-center rounded-lg border-8 border-solid border-black"
+    >
+      <form
+        id="formulario"
+        class="flex flex-col items-center justify-center font-medium"
+        action=""
+      >
+        <label for="peso" class="mt-5"> Peso en Kg</label>
+        <input
+          class="w-32 rounded-lg border-2 border-solid border-black"
+          id="peso"
+          type="text"
+        />
+        <label for="altura" class="mt-5">Altura en cm</label>
+        <input
+          class="w-32 rounded-lg border-2 border-solid border-black"
+          id="altura"
+          type="text"
+        />
+        <label for="altura" class="mt-5">Edad</label>
+        <input
+          class="w-32 rounded-lg border-2 border-solid border-black"
+          id="edad"
+          type="text"
+        />
+        <p class="mt-5">Sexo</p>
+
+        <div class="flex w-32 justify-around">
+          <div>
+            <label for="masculino" class="relative mr-7 block select-none pr-4"
+              >M
+              <input
+                id="masculino"
+                class="peer absolute h-0 w-0 opacity-0"
+                type="checkbox"
+              />
+              <span
+                class="absolute h-7 w-7 rounded-full border-2 border-solid border-black peer-checked:bg-blue-500"
+              ></span>
+            </label>
+          </div>
+          <div>
+            <label
+              id="etiquetaF"
+              for="femenino"
+              class="relative mr-7 block select-none"
+              >F
+              <input
+                id="femenino"
+                class="peer absolute h-0 w-0 opacity-0"
+                type="checkbox"
+              />
+              <span
+                class="absolute inline-block h-7 w-7 rounded-full border-2 border-solid border-black peer-checked:bg-blue-500"
+              ></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="flex flex-col items-center justify-center">
+          <div class="mt-5 flex justify-center font-medium">
+            <div class="ml-6 flex justify-center">Nivel de actividad</div>
+            <div class="w-[16%]">
+              <img
+                src="../assets/icons/helpIcon.png"
+                class="w-[100%] pl-5"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="mt-5 flex justify-evenly" id="nivelDeActividadDiv">
+            <label
+              for="sedentario"
+              class="flex w-[15%] flex-col items-center justify-center rounded-lg border-[3px] border-solid border-black shadow-[2px_3px_0px_0px_#000000]"
+            >
+              <img
+                src="../assets/nivelDeActividadIconos/sedentario.webp"
+                alt=""
+              />
+              <div class="w-fit text-[60%] font-extrabold">Sedentario</div>
+            </label>
+            <input
+              type="button"
+              id="sedentario"
+              name="nivelDeActividad"
+              value="1.2"
+              class="h-0 w-0 opacity-0"
+            />
+            <label
+              for="ligero"
+              class="flex w-[15%] flex-col items-center justify-center rounded-lg border-[3px] border-solid border-black pt-[3px] text-sm shadow-[2px_3px_0px_0px_#000000]"
+            >
+              <img
+                class=""
+                src="../assets/nivelDeActividadIconos/ejercicioLigero.webp"
+                alt=""
+              />
+              <div class="w-fit text-[80%] font-bold">Ligero</div>
+            </label>
+            <input
+              type="button"
+              id="ligero"
+              name="nivelDeActividad"
+              value="1.375"
+              class="h-0 w-0 opacity-0"
+            />
+            <label
+              for="moderado"
+              class="flex w-[15%] flex-col items-center justify-center rounded-lg border-[3px] border-solid border-black pt-[3px] text-sm shadow-[2px_3px_0px_0px_#000000]"
+              ><img
+                src="../assets/nivelDeActividadIconos/ejercicioModerado.webp"
+                alt=""
+              />
+              <div class="w-fit text-[70%] font-bold">Moderado</div>
+            </label>
+            <input
+              type="button"
+              id="moderado"
+              name="nivelDeActividad"
+              value="1.55"
+              class="h-0 w-0 opacity-0"
+            />
+            <label
+              for="fuerte"
+              class="flex w-[15%] flex-col items-center justify-center rounded-lg border-[3px] border-solid border-black pt-[3px] text-sm shadow-[2px_3px_0px_0px_#000000]"
+              ><img
+                class=""
+                src="../assets/nivelDeActividadIconos/ejercicioFuerte.webp"
+                alt=""
+              />
+              <div class="w-fit text-[80%] font-bold">Fuerte</div>
+            </label>
+            <input
+              type="button"
+              id="fuerte"
+              name="nivelDeActividad"
+              value="1.725"
+              class="h-0 w-0 opacity-0"
+            />
+            <label
+              for="intenso"
+              class="flex w-[15%] flex-col items-center justify-center rounded-lg border-[3px] border-solid border-black pt-[3px] text-sm shadow-[2px_3px_0px_0px_#000000]"
+              ><img
+                src="../assets/nivelDeActividadIconos/ejercicioIntenso.webp"
+                alt=""
+              />
+              <div class="w-fit text-[80%] font-bold">Intenso</div>
+            </label>
+            <input
+              type="button"
+              id="intenso"
+              name="nivelDeActividad"
+              value="1.9"
+              class="h-0 w-0 opacity-0"
+            />
+          </div>
+        </div>
+        <button
+          id="calcularBoton"
+          class="mt-6 border-2 border-solid border-black"
+          type="button"
+        >
+          Calcular
+        </button>
+      </form>
+    </div>
+    <!-- calculadora -->
   </body>
 </html>
