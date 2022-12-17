@@ -1,12 +1,49 @@
 let sexo = document.querySelectorAll("input[type=checkbox]");
 sexo[0].checked = true;
+let botonesNivelDeActividad = document.getElementsByName("nivelDeActividad");
 let botonCalcular = document.getElementById("calcularBoton");
+let nivelDeActividad;
 let sexoSeleccionado;
 
 sexo.forEach((radio) => {
   radio.addEventListener("click", setCheckBoxSelection, false);
 });
 botonCalcular.addEventListener("click", main, false);
+
+botonesNivelDeActividad.forEach((boton) => {
+  boton.addEventListener("click", setNivelDeActividad, false);
+  boton.addEventListener("click", setNivelDeActividadBotonEstilo, false);
+});
+
+function setNivelDeActividad(event) {
+  nivelDeActividad = event.target.value;
+}
+
+function setNivelDeActividadBotonEstilo(event) {
+  let etiquetas = document
+    .getElementById("nivelDeActividadDiv")
+    .querySelectorAll("label:nth-child(odd)");
+  for (let i = 0; i < etiquetas.length; i++) {
+    if (etiquetas[i].htmlFor === event.target.id) {
+      etiquetas.forEach((cadaEtiqueta) => {
+        cadaEtiqueta.style.borderColor = "black";
+      });
+      etiquetas[i].style.borderColor = "#2196F3";
+      setNivelDeActividadBotonAnimation(etiquetas[i], etiquetas);
+    }
+  }
+}
+
+function setNivelDeActividadBotonAnimation(etiquetaSeleccionada, etiquetas) {
+  etiquetaSeleccionada.classList.add("animate-pingOnce");
+  etiquetaSeleccionada.addEventListener(
+    "animationend",
+    function () {
+      etiquetaSeleccionada.classList.remove("animate-pingOnce");
+    },
+    false
+  );
+}
 
 function setCheckBoxSelection(event) {
   sexo.forEach((cadaRadio) => {
@@ -22,7 +59,7 @@ class Persona {
     this.altura = document.getElementById("altura").value;
     this.edad = document.getElementById("edad").value;
     this.sexo = sexoSeleccionado;
-    this.nivelDeActividad = document.getElementById("nivelDeActividad").value;
+    this.nivelDeActividad = nivelDeActividad;
   }
 }
 
@@ -46,7 +83,11 @@ class CalculadoraMetabolica {
 function appendResult(resultado) {
   let resultadoText = document.getElementById("resultadoText");
   resultadoText.style.color = "white";
-  if (!isNaN(resultado)) resultadoText.innerText = parseInt(resultado) + " Kl";
+  if (!isNaN(resultado)) {
+    resultadoText.innerText = parseInt(resultado) + " Kl";
+    let cartelResultado = document.body.querySelector("div:first-child");
+    cartelResultado.classList.remove("hidden");
+  }
 }
 
 function validateValues(peso, altura, edad) {
@@ -61,6 +102,8 @@ function validateValues(peso, altura, edad) {
     document.getElementById("resultadoText").style.color = "#FF4747";
     document.getElementById("resultadoText").innerText =
       "Uno de los valores ingresados es invalido";
+    let cartelResultado = document.body.querySelector("div:first-child");
+    cartelResultado.classList.remove("hidden");
     return false;
   } else {
     return true;
