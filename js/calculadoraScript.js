@@ -123,3 +123,25 @@ function main() {
     appendResult(resultado);
   }
 }
+
+document
+  .getElementById("helpIcon")
+  .addEventListener("click", abrirCuadroDeDialogo, false);
+
+console.log(document.getElementById("helpIcon"));
+document
+  .getElementById("closeIcon")
+  .addEventListener("click", cerrarCuadroDeDialogo, false);
+
+function abrirCuadroDeDialogo(event) {
+  document
+    .getElementById("closeIcon")
+    .parentNode.parentNode.parentNode.parentNode.classList.remove("hidden");
+  console.log("click");
+}
+
+function cerrarCuadroDeDialogo(event) {
+  document
+    .getElementById("closeIcon")
+    .parentNode.parentNode.parentNode.parentNode.classList.add("hidden");
+}
