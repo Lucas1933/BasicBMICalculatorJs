@@ -33,6 +33,43 @@
       id="calculadoraDiv"
       class="calculadora mr-3 ml-3 flex w-fit justify-center rounded-lg border-8 border-solid border-black"
     >
+      <div
+        class="absolute top-0 bottom-0 right-0 left-0 z-10 flex hidden h-[%100] w-[%100] flex-col-reverse justify-center bg-transparent"
+      >
+        <div
+          class="h-[%100] w-[%100] rounded-lg border-2 border-solid border-black bg-blue-500"
+        >
+          <div class="flex justify-end">
+            <div class="w-fit">
+              <img
+                id="closeIcon"
+                src="../assets/icons/close-icon.svg"
+                alt=""
+                class="h[25px] mr-[5px] mt-[5px] w-[25px]"
+              />
+            </div>
+          </div>
+          <p class="text-center text-white">
+            <span class="font-bold underline">Sedentario:</span> no realizas
+            actividades que requieran moverse mas de lo necesario (trabajos de
+            oficina, caminar para solo para desplazarce, etc). <br />
+            <br />
+            <span class="font-bold underline">Ligero:</span> trabajo que
+            requiere desplazarce continuamente (mozos, limpieza) caminatas mas
+            alla de lo necesario para desplazarce. <br /><br />
+            <span class="font-bold underline">Moderado:</span> trabajo pesado
+            (mover muebles, construccion) realizas actividades como
+            correr/trotar o levantamiento de pesas al menos 2 veces por semana.
+            <br /><br />
+            <span class="font-bold underline">Fuerte:</span> trabajo pesado,
+            realizas actividades como correro/trotar y/o levantamiento de pesas
+            +3 veces por semana.<br /><br />
+            <span class="font-bold underline">Intenso:</span> trabajo pesado,
+            realizas actividades como correr/trotar y levantamiento de pesas +5
+            veces por semana.
+          </p>
+        </div>
+      </div>
       <form
         id="formulario"
         class="flex flex-col items-center justify-center font-medium"
@@ -98,6 +135,7 @@
                 src="../assets/icons/helpIcon.png"
                 class="w-[100%] pl-5"
                 alt=""
+                id="helpIcon"
               />
             </div>
           </div>
