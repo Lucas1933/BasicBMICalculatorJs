@@ -1,20 +1,28 @@
+/* botones radio de sexo */
 let sexo = document.querySelectorAll("input[type=checkbox]");
-sexo[0].checked = true;
-let botonesNivelDeActividad = document.getElementsByName("nivelDeActividad");
-let botonCalcular = document.getElementById("calcularBoton");
-let nivelDeActividad;
-let sexoSeleccionado;
-
+sexo[0].checked = true; /*se lo deja checkeado para no tener que controlar si fue seleccionado*/
 sexo.forEach((radio) => {
   radio.addEventListener("click", setCheckBoxSelection, false);
 });
-botonCalcular.addEventListener("click", main, false);
 
+let sexoSeleccionado;
+function setCheckBoxSelection(event) {
+  sexo.forEach((cadaRadio) => {
+    cadaRadio.checked = false;
+  });
+  event.target.checked = true;
+  sexoSeleccionado = event.target.id;
+}
+/* botones radio de sexo */
+
+/* inputs niveles de actividad */
+let botonesNivelDeActividad = document.getElementsByName("nivelDeActividad");
 botonesNivelDeActividad.forEach((boton) => {
   boton.addEventListener("click", setNivelDeActividad, false);
   boton.addEventListener("click", setNivelDeActividadBotonEstilo, false);
 });
 
+let nivelDeActividad;
 function setNivelDeActividad(event) {
   nivelDeActividad = event.target.value;
 }
@@ -22,7 +30,9 @@ function setNivelDeActividad(event) {
 function setNivelDeActividadBotonEstilo(event) {
   let etiquetas = document
     .getElementById("nivelDeActividadDiv")
-    .querySelectorAll("label:nth-child(odd)");
+    .querySelectorAll(
+      "label:nth-child(odd)" /* obtengo los hijos impares que son las labels para animarlas */
+    );
   for (let i = 0; i < etiquetas.length; i++) {
     if (etiquetas[i].htmlFor === event.target.id) {
       etiquetas.forEach((cadaEtiqueta) => {
@@ -34,7 +44,7 @@ function setNivelDeActividadBotonEstilo(event) {
   }
 }
 
-function setNivelDeActividadBotonAnimation(etiquetaSeleccionada, etiquetas) {
+function setNivelDeActividadBotonAnimation(etiquetaSeleccionada) {
   etiquetaSeleccionada.classList.add("animate-pingOnce");
   etiquetaSeleccionada.addEventListener(
     "animationend",
@@ -44,13 +54,34 @@ function setNivelDeActividadBotonAnimation(etiquetaSeleccionada, etiquetas) {
     false
   );
 }
+/* inputs niveles de actividad */
 
-function setCheckBoxSelection(event) {
-  sexo.forEach((cadaRadio) => {
-    cadaRadio.checked = false;
-  });
-  event.target.checked = true;
-  sexoSeleccionado = event.target.id;
+/* boton calcular */
+let botonCalcular = document.getElementById("calcularBoton");
+botonCalcular.addEventListener("click", main, false);
+/* boton calcular */
+
+/* function principal, se ejecuta al presionar calcular dando pie a la parte principal del programa */
+function main() {
+  let persona = new Persona();
+  let calculadora = new CalculadoraMetabolica();
+  let resultado;
+  if (calculadora.validateValues(persona)) {
+    resultado = calculadora.obtenerCalorias(persona);
+    appendResult(resultado);
+  }
+}
+function appendResult(resultado) {
+  let cartelResultado = document.body.querySelector("div:first-child");
+  let caloriasQuemadasPorDia = cartelResultado.firstElementChild;
+  let resultadoText = cartelResultado.lastElementChild;
+  resultadoText.style.color = "white";
+
+  if (!isNaN(resultado)) {
+    caloriasQuemadasPorDia.innerText = "Calorias quemadas por dia:";
+    resultadoText.innerText = parseInt(resultado) + " Kl";
+    cartelResultado.classList.remove("hidden");
+  }
 }
 
 class Persona {
@@ -65,83 +96,66 @@ class Persona {
 
 class CalculadoraMetabolica {
   constructor() {}
-  obtenerCalorias(peso, altura, edad, sexo, nivelDeActividad) {
+  validateValues(persona) {
+    if (
+      isNaN(persona.peso) ||
+      isNaN(persona.altura) ||
+      isNaN(persona.edad) ||
+      persona.peso <= 0 ||
+      persona.altura <= 0 ||
+      persona.edad <= 0
+    ) {
+      this.appendDatoinvalido();
+      return false;
+    } else {
+      return true;
+    }
+  }
+  appendDatoinvalido() {
+    let cartelResultado = document.body.querySelector(
+      "div:first-child" /* primer hijo del body, el div que es el cartel con el resultado */
+    );
+    let caloriasQuemadasPorDia = cartelResultado.firstElementChild;
+    let resultadoText = cartelResultado.lastElementChild;
+    caloriasQuemadasPorDia.innerText = " ";
+    resultadoText.style.color = "#FF4747";
+    resultadoText.innerText = "Uno de los valores ingresados es invalido";
+    cartelResultado.classList.remove("hidden");
+  }
+  /* ecuacion Mifflin-St Jeor para la Tasa Metabolica Basal */
+  /* TMB = (10 x peso en kg) + (6,25 × altura en cm) – (5 × edad en años) + 5 */ /* de ser femenino se cambia el 5 por un -161 */
+  obtenerCalorias(persona) {
     let resultado;
     let valorPorSexo = 5;
     if (sexo === "femenino") {
       valorPorSexo = -161;
     }
     resultado =
-      10 * parseInt(peso) +
-      6.25 * parseInt(altura) -
-      5 * parseInt(edad) +
+      10 * parseInt(persona.peso) +
+      6.25 * parseInt(persona.altura) -
+      5 * parseInt(persona.edad) +
       valorPorSexo;
 
-    return resultado * parseFloat(nivelDeActividad);
+    return resultado * parseFloat(persona.nivelDeActividad);
   }
 }
-function appendResult(resultado) {
-  let resultadoText = document.getElementById("resultadoText");
-  resultadoText.style.color = "white";
-  if (!isNaN(resultado)) {
-    resultadoText.innerText = parseInt(resultado) + " Kl";
-    let cartelResultado = document.body.querySelector("div:first-child");
-    cartelResultado.classList.remove("hidden");
-  }
-}
+/* function principal, se ejecuta al presionar calcular dando pie a la parte principal del programa */
 
-function validateValues(peso, altura, edad) {
-  if (
-    isNaN(peso) ||
-    isNaN(altura) ||
-    isNaN(edad) ||
-    peso <= 0 ||
-    altura <= 0 ||
-    edad <= 0
-  ) {
-    document.getElementById("resultadoText").style.color = "#FF4747";
-    document.getElementById("resultadoText").innerText =
-      "Uno de los valores ingresados es invalido";
-    let cartelResultado = document.body.querySelector("div:first-child");
-    cartelResultado.classList.remove("hidden");
-    return false;
-  } else {
-    return true;
-  }
-}
-function main() {
-  let persona = new Persona();
-  if (validateValues(persona.peso, persona.altura, persona.edad)) {
-    let calculadora = new CalculadoraMetabolica();
-    let resultado = calculadora.obtenerCalorias(
-      persona.peso,
-      persona.altura,
-      persona.edad,
-      persona.sexo,
-      persona.nivelDeActividad
-    );
-    appendResult(resultado);
-  }
-}
+/* cuadro de dialogo sobre los niveles de actividad */
+let iconoDeAyuda = document.getElementById("helpIcon");
+iconoDeAyuda.addEventListener("click", abrirCuadroDeDialogo, false);
 
-document
-  .getElementById("helpIcon")
-  .addEventListener("click", abrirCuadroDeDialogo, false);
+let iconoDeCierre = document.getElementById("closeIcon");
+iconoDeCierre.addEventListener("click", cerrarCuadroDeDialogo, false);
 
-console.log(document.getElementById("helpIcon"));
-document
-  .getElementById("closeIcon")
-  .addEventListener("click", cerrarCuadroDeDialogo, false);
+let cuadroDeDialogoNdeActividad =
+  iconoDeCierre.parentNode.parentNode.parentNode.parentNode;
 
 function abrirCuadroDeDialogo(event) {
-  document
-    .getElementById("closeIcon")
-    .parentNode.parentNode.parentNode.parentNode.classList.remove("hidden");
-  console.log("click");
+  cuadroDeDialogoNdeActividad.classList.remove("hidden");
 }
 
 function cerrarCuadroDeDialogo(event) {
-  document
-    .getElementById("closeIcon")
-    .parentNode.parentNode.parentNode.parentNode.classList.add("hidden");
+  cuadroDeDialogoNdeActividad.classList.add("hidden");
 }
+/* cuadro de dialogo sobre los niveles de actividad */
