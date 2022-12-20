@@ -5,7 +5,7 @@ sexo.forEach((radio) => {
   radio.addEventListener("click", setCheckBoxSelection, false);
 });
 
-let sexoSeleccionado;
+let sexoSeleccionado = "masculino";
 function setCheckBoxSelection(event) {
   sexo.forEach((cadaRadio) => {
     cadaRadio.checked = false;
@@ -62,26 +62,11 @@ botonCalcular.addEventListener("click", main, false);
 /* boton calcular */
 
 /* function principal, se ejecuta al presionar calcular dando pie a la parte principal del programa */
+
 function main() {
   let persona = new Persona();
   let calculadora = new CalculadoraMetabolica();
-  let resultado;
-  if (calculadora.validateValues(persona)) {
-    resultado = calculadora.obtenerCalorias(persona);
-    appendResult(resultado);
-  }
-}
-function appendResult(resultado) {
-  let cartelResultado = document.body.querySelector("div:first-child");
-  let caloriasQuemadasPorDia = cartelResultado.firstElementChild;
-  let resultadoText = cartelResultado.lastElementChild;
-  resultadoText.style.color = "white";
-
-  if (!isNaN(resultado)) {
-    caloriasQuemadasPorDia.innerText = "Calorias quemadas por dia:";
-    resultadoText.innerText = parseInt(resultado) + " Kl";
-    cartelResultado.classList.remove("hidden");
-  }
+  calculadora.obtenerCalorias(persona);
 }
 
 class Persona {
@@ -125,20 +110,35 @@ class CalculadoraMetabolica {
   /* ecuacion Mifflin-St Jeor para la Tasa Metabolica Basal */
   /* TMB = (10 x peso en kg) + (6,25 × altura en cm) – (5 × edad en años) + 5 */ /* de ser femenino se cambia el 5 por un -161 */
   obtenerCalorias(persona) {
-    let resultado;
-    let valorPorSexo = 5;
-    if (sexo === "femenino") {
-      valorPorSexo = -161;
+    if (this.validateValues(persona)) {
+      let resultado;
+      let valorPorSexo = 5;
+      if (persona.sexo === "femenino") {
+        valorPorSexo = -161;
+      }
+      resultado =
+        10 * parseInt(persona.peso) +
+        6.25 * parseInt(persona.altura) -
+        5 * parseInt(persona.edad) +
+        valorPorSexo;
+      this.appendResult(resultado * parseFloat(persona.nivelDeActividad));
+      return resultado * parseFloat(persona.nivelDeActividad);
     }
-    resultado =
-      10 * parseInt(persona.peso) +
-      6.25 * parseInt(persona.altura) -
-      5 * parseInt(persona.edad) +
-      valorPorSexo;
+  }
+  appendResult(resultado) {
+    let cartelResultado = document.body.querySelector("div:first-child");
+    let caloriasQuemadasPorDia = cartelResultado.firstElementChild;
+    let resultadoText = cartelResultado.lastElementChild;
+    resultadoText.style.color = "white";
 
-    return resultado * parseFloat(persona.nivelDeActividad);
+    if (!isNaN(resultado)) {
+      caloriasQuemadasPorDia.innerText = "Calorias quemadas por dia:";
+      resultadoText.innerText = parseInt(resultado) + " Kl";
+      cartelResultado.classList.remove("hidden");
+    }
   }
 }
+
 /* function principal, se ejecuta al presionar calcular dando pie a la parte principal del programa */
 
 /* cuadro de dialogo sobre los niveles de actividad */
