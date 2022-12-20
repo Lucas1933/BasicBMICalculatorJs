@@ -4,7 +4,6 @@ sexo[0].checked = true; /*se lo deja checkeado para no tener que controlar si fu
 sexo.forEach((radio) => {
   radio.addEventListener("click", setCheckBoxSelection, false);
 });
-
 let sexoSeleccionado = "masculino";
 function setCheckBoxSelection(event) {
   sexo.forEach((cadaRadio) => {
@@ -39,7 +38,7 @@ function setNivelDeActividadBotonEstilo(event) {
         cadaEtiqueta.style.borderColor = "black";
       });
       etiquetas[i].style.borderColor = "#2196F3";
-      setNivelDeActividadBotonAnimation(etiquetas[i], etiquetas);
+      setNivelDeActividadBotonAnimation(etiquetas[i]);
     }
   }
 }
@@ -62,11 +61,26 @@ botonCalcular.addEventListener("click", main, false);
 /* boton calcular */
 
 /* function principal, se ejecuta al presionar calcular dando pie a la parte principal del programa */
-
+const historial = [];
 function main() {
   let persona = new Persona();
   let calculadora = new CalculadoraMetabolica();
   calculadora.obtenerCalorias(persona);
+  /* codigo para consigna uso metodo de array. De no ser obligatorio no va a estar en la implementacion final */
+  historial.push(persona);
+  console.log(
+    "Historial femenino: " +
+      JSON.stringify(
+        historial.filter((cadaPersona) => cadaPersona.sexo === "femenino")
+      )
+  );
+  console.log(
+    "Historial masculino: " +
+      JSON.stringify(
+        historial.filter((cadaPersona) => cadaPersona.sexo === "masculino")
+      )
+  );
+  /* codigo para consigna uso metodo de array. De no ser obligatorio no va a estar en la implementacion final */
 }
 
 class Persona {
