@@ -1,10 +1,17 @@
 /* botones radio de sexo */
-let sexo = document.querySelectorAll("input[type=checkbox]");
-sexo[0].checked = true; /*se lo deja checkeado para no tener que controlar si fue seleccionado*/
+const sexo = document.querySelectorAll("input[type=checkbox]");
+/* se lo deja hardcodeado para no tener que controlar si fue seleccionado */
+sexo[0].checked = true;
 sexo.forEach((radio) => {
   radio.addEventListener("click", setCheckBoxSelection, false);
 });
 let sexoSeleccionado = "masculino";
+/**
+ * Deja seleccionar solo un input radio (M || F).
+ * Asigna al final a sexoSeleccionado el id del input seleccionado ("masculino" || "femenino").
+ * @param {Event} event el input radio que dispara el evento.
+ * @return {void}.
+ */
 function setCheckBoxSelection(event) {
   sexo.forEach((cadaRadio) => {
     cadaRadio.checked = false;
@@ -12,26 +19,34 @@ function setCheckBoxSelection(event) {
   event.target.checked = true;
   sexoSeleccionado = event.target.id;
 }
-/* botones radio de sexo */
 
-/* inputs niveles de actividad */
-let botonesNivelDeActividad = document.getElementsByName("nivelDeActividad");
-botonesNivelDeActividad.forEach((boton) => {
+/* seleccion y animacion de niveles de actividad listeners */
+const inputsNivelDeActividad = document.getElementsByName("nivelDeActividad");
+inputsNivelDeActividad.forEach((boton) => {
   boton.addEventListener("click", setNivelDeActividad, false);
   boton.addEventListener("click", setNivelDeActividadBotonEstilo, false);
 });
 
 let nivelDeActividad;
+/**
+ * Asigna el value del boton de nivel de actividad seleccionado ("1.34, 1.75, etc")
+ * @param {Event} event el boton de nivel de actividad que dispara el evento.
+ * @return {void}.
+ */
 function setNivelDeActividad(event) {
   nivelDeActividad = event.target.value;
 }
-
+/**
+ * Obtengo las labels, al clickear en una se cambia su borde y se restaura el borde del resto
+ * finalmente a la etiqueta que triggerea el evento se la pasa por parametro a otra funcion
+ * para animarla
+ * @param {Event} event el boton de nivel de actividad que dispara el evento.
+ * @return {void}.
+ */
 function setNivelDeActividadBotonEstilo(event) {
-  let etiquetas = document
+  const etiquetas = document
     .getElementById("nivelDeActividadDiv")
-    .querySelectorAll(
-      "label:nth-child(odd)" /* obtengo los hijos impares que son las labels para animarlas */
-    );
+    .querySelectorAll("label:nth-child(odd)");
   for (let i = 0; i < etiquetas.length; i++) {
     if (etiquetas[i].htmlFor === event.target.id) {
       etiquetas.forEach((cadaEtiqueta) => {
@@ -42,7 +57,14 @@ function setNivelDeActividadBotonEstilo(event) {
     }
   }
 }
-
+/**
+ * Añado la animacion a la etiqueta que disparo el evento de la funcion anterior
+ * Añado un listener que espera a que la animacion termine para remover la animacion (class)
+ * esto permite que se pueda volver a disparar la animacion al seleccionar nuevamente
+ * la misma etiqueta.
+ * @param {Parameter} etiquetaSeleccionada la etiqueta que fue clickeada.
+ * @return {void}.
+ */
 function setNivelDeActividadBotonAnimation(etiquetaSeleccionada) {
   etiquetaSeleccionada.classList.add("animate-pingOnce");
   etiquetaSeleccionada.addEventListener(
@@ -53,37 +75,26 @@ function setNivelDeActividadBotonAnimation(etiquetaSeleccionada) {
     false
   );
 }
-/* inputs niveles de actividad */
 
-/* boton calcular */
-let botonCalcular = document.getElementById("calcularBoton");
+/**
+ * funcion main que se ejecuta al presionar "calcular"
+ * da pie a la creacion de un objeto Persona con los datos obtenidos del form
+ * (peso, altura, etc)
+ * se crea un objeto calculadora y se le pasa al metodo de la misma obtenerCalorias()
+ * la persona creada.
+ * @return {void}.
+ */
+const botonCalcular = document.getElementById("calcularBoton");
 botonCalcular.addEventListener("click", main, false);
-/* boton calcular */
-
-/* function principal, se ejecuta al presionar calcular dando pie a la parte principal del programa */
-const historial = [];
 function main() {
-  let persona = new Persona();
-  let calculadora = new CalculadoraMetabolica();
+  const persona = new Persona();
+  const calculadora = new CalculadoraMetabolica();
   calculadora.obtenerCalorias(persona);
-  /* codigo para consigna uso metodo de array. De no ser obligatorio no va a estar en la implementacion final */
-  historial.push(persona);
-  console.log(
-    "Historial femenino: " +
-      JSON.stringify(
-        historial.filter((cadaPersona) => cadaPersona.sexo === "femenino")
-      )
-  );
-  console.log(
-    "Historial masculino: " +
-      JSON.stringify(
-        historial.filter((cadaPersona) => cadaPersona.sexo === "masculino")
-      )
-  );
-  /* codigo para consigna uso metodo de array. De no ser obligatorio no va a estar en la implementacion final */
 }
 
+// eslint-disable-next-line require-jsdoc
 class Persona {
+  // eslint-disable-next-line require-jsdoc
   constructor() {
     this.peso = document.getElementById("peso").value;
     this.altura = document.getElementById("altura").value;
@@ -92,9 +103,22 @@ class Persona {
     this.nivelDeActividad = nivelDeActividad;
   }
 }
-
+/**
+ *Class CalculadoraMetabolica, se encarga de calcular las calorias
+ *validar los valores y mostrar el resultado del calculo.
+ */
 class CalculadoraMetabolica {
+  /**
+   * constructor por defecto
+   */
   constructor() {}
+  /**
+   *recibe una persona y valida que los datos sean numericos y mayores a cero
+   *de ser invalidados llama appendDatoinvalido()
+   *de otra forma devuelve true
+   * @param {Persona} persona
+   * @return {boolean}
+   */
   validateValues(persona) {
     if (
       isNaN(persona.peso) ||
@@ -110,19 +134,30 @@ class CalculadoraMetabolica {
       return true;
     }
   }
+  /**
+   *añade al div que contiene el cartel para mostrar el resultado
+   *informando que uno de los valores es invalido
+   *finalmente remueve la class hidden mostrando asi el cartel
+   * @return {void}
+   */
   appendDatoinvalido() {
-    let cartelResultado = document.body.querySelector(
+    const cartelResultado = document.body.querySelector(
       "div:first-child" /* primer hijo del body, el div que es el cartel con el resultado */
     );
-    let caloriasQuemadasPorDia = cartelResultado.firstElementChild;
-    let resultadoText = cartelResultado.lastElementChild;
+    const caloriasQuemadasPorDia = cartelResultado.firstElementChild;
+    const resultadoText = cartelResultado.lastElementChild;
     caloriasQuemadasPorDia.innerText = " ";
     resultadoText.style.color = "#FF4747";
     resultadoText.innerText = "Uno de los valores ingresados es invalido";
     cartelResultado.classList.remove("hidden");
   }
-  /* ecuacion Mifflin-St Jeor para la Tasa Metabolica Basal */
-  /* TMB = (10 x peso en kg) + (6,25 × altura en cm) – (5 × edad en años) + 5 */ /* de ser femenino se cambia el 5 por un -161 */
+  /**
+   *utilizando la formula mifflin st jeor se calcula utilizando los valores
+   *de la persona
+   *retorna el resultado multiplicado por el nivel de actividad
+   * @param {Persona} persona
+   * @return {float}
+   */
   obtenerCalorias(persona) {
     if (this.validateValues(persona)) {
       let resultado;
@@ -139,6 +174,10 @@ class CalculadoraMetabolica {
       return resultado * parseFloat(persona.nivelDeActividad);
     }
   }
+  /**
+   *accede a los elementos del cartel, les da estilo y appends el resultado.
+   * @param {floar} resultado
+   */
   appendResult(resultado) {
     let cartelResultado = document.body.querySelector("div:first-child");
     let caloriasQuemadasPorDia = cartelResultado.firstElementChild;
@@ -153,8 +192,6 @@ class CalculadoraMetabolica {
   }
 }
 
-/* function principal, se ejecuta al presionar calcular dando pie a la parte principal del programa */
-
 /* cuadro de dialogo sobre los niveles de actividad */
 let iconoDeAyuda = document.getElementById("helpIcon");
 iconoDeAyuda.addEventListener("click", abrirCuadroDeDialogo, false);
@@ -164,12 +201,18 @@ iconoDeCierre.addEventListener("click", cerrarCuadroDeDialogo, false);
 
 let cuadroDeDialogoNdeActividad =
   iconoDeCierre.parentNode.parentNode.parentNode.parentNode;
-
+/**
+ *remueve la class hidden del cuadro de dialogo
+ *con la informacion acerca de los niveles de actividad
+ * @param {Event} event el icono de ayuda azul
+ */
 function abrirCuadroDeDialogo(event) {
   cuadroDeDialogoNdeActividad.classList.remove("hidden");
 }
-
+/**
+ *añade la class hidden del cartel con la informacion acerca de los niveles de actividad
+ * @param {Event} event el icono de cierre del cuadro de dialogo
+ */
 function cerrarCuadroDeDialogo(event) {
   cuadroDeDialogoNdeActividad.classList.add("hidden");
 }
-/* cuadro de dialogo sobre los niveles de actividad */
