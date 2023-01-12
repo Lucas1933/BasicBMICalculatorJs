@@ -5,8 +5,30 @@ class Persona {
     this.edad = document.getElementById("edad").value;
     this.sexo = sexoSeleccionado;
     this.nivelDeActividad = nivelDeActividad;
+    this.fecha = new Date().toLocaleString("es-AR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    this.id = this.asignarId();
+  }
+
+  asignarId() {
+    let contador = 0;
+    if (localStorage.getItem("id") == contador) {
+      contador++;
+      localStorage.setItem("id", contador);
+    } else {
+      contador = localStorage.getItem("id");
+      contador++;
+      localStorage.setItem("id", contador);
+    }
+    return localStorage.getItem("id");
   }
 }
+
 /**
  *Class CalculadoraMetabolica, se encarga de calcular las calorias y
  *validar los valores.
@@ -79,7 +101,6 @@ function setCheckBoxSelection(event) {
   event.target.checked = true;
   sexoSeleccionado = event.target.id;
 }
-/* M o F radio input */
 
 /* seleccion y animacion de niveles de actividad listeners */
 const inputsNivelDeActividad = document.getElementsByName("nivelDeActividad");
@@ -139,7 +160,6 @@ function setNivelDeActividadBotonAnimation(etiquetaSeleccionada) {
     false
   );
 }
-/* seleccion y animacion de niveles de actividad listeners */
 
 /* Calculo*/
 const botonCalcular = document.getElementById("calcularBoton");
@@ -149,6 +169,7 @@ function main() {
   const calculadora = new CalculadoraMetabolica();
   let resultado = calculadora.obtenerCalorias(persona);
   appendResult(resultado);
+  setHistorialDeCalculos(persona);
 }
 /**
  *accede a los elementos del cartel, les da estilo y appends el resultado.
@@ -185,7 +206,9 @@ function appendDatoinvalido() {
   resultadoText.innerText = "Uno de los valores ingresados es invalido";
   cartelResultado.classList.remove("hidden");
 }
-/* Calculo */
+function setHistorialDeCalculos(persona) {
+  localStorage.setItem(persona.id, JSON.stringify(persona));
+}
 
 /* cuadro de dialogo sobre los niveles de actividad */
 let iconoDeAyuda = document.getElementById("helpIcon");
@@ -211,4 +234,40 @@ function abrirCuadroDeDialogo(event) {
 function cerrarCuadroDeDialogo(event) {
   cuadroDeDialogoNdeActividad.classList.add("hidden");
 }
-/* cuadro de dialogo sobre los niveles de actividad */
+
+document.getElementById("clean").addEventListener("click", () => {
+  localStorage.clear();
+});
+
+document.getElementById("historial").addEventListener("click", print);
+document.getElementById("clearHistorial").addEventListener("click", () => {
+  document.getElementById("historialCartel").innerText = " ";
+});
+
+function print() {
+  let calculadora = new CalculadoraMetabolica();
+  const historialDiv = document.getElementById("historialCartel");
+  historialDiv.innerText = " ";
+  for (let i = 1; i < localStorage.length; i++) {
+    let cadaPersona = JSON.parse(localStorage.getItem(i));
+    if (calculadora.validateValues(cadaPersona)) {
+      historialDiv.innerText +=
+        "Peso: " +
+        cadaPersona.peso +
+        "\n" +
+        "Altura: " +
+        cadaPersona.altura +
+        "\n" +
+        "Edad: " +
+        cadaPersona.edad +
+        "\n" +
+        "Sexo: " +
+        cadaPersona.sexo +
+        "\n" +
+        "ID: " +
+        cadaPersona.id +
+        "\n" +
+        "\n";
+    }
+  }
+}

@@ -11,11 +11,11 @@
     <title>Calculadora de calorias</title>
   </head>
   <body
-    class="flex h-screen flex-col items-center justify-center overflow-x-hidden"
+    class="flex h-screen flex-col items-center justify-center overflow-x-hidden lg:flex-row"
   >
     <!-- cartel del resultado -->
     <div
-      class="ml-10 mr-4 flex hidden h-48 w-96 flex-col items-center justify-center bg-slate-500 lg:ml-28"
+      class="ml-10 mr-4 flex hidden h-48 w-96 flex-col items-center justify-center bg-slate-500 lg:h-fit lg:w-[20%]"
     >
       <p class="inline-block text-center text-sm font-bold text-white"></p>
       <p
@@ -28,7 +28,7 @@
     <!-- calculadora -->
     <div
       id="calculadoraDiv"
-      class="calculadora mr-3 ml-3 flex w-fit justify-center rounded-lg border-8 border-solid border-black"
+      class="calculadora mr-3 ml-3 flex w-[30%] justify-center rounded-lg border-8 border-solid border-black"
     >
       <div
         class="absolute top-0 bottom-0 z-10 flex hidden h-[%100] w-[%100] flex-col-reverse justify-center bg-transparent pl-5 pr-5"
@@ -230,6 +230,26 @@
         </button>
       </form>
     </div>
+
+    <div class="lg:flex lg:flex-col">
+      <div class="flex flex-col">
+        <button id="clean" class="mb-8 border-4 border-solid bg-slate-400">
+          Clean local storage
+        </button>
+        <div>
+          <button id="historial" class="border-4 border-solid bg-slate-400">
+            Historial
+          </button>
+          <button
+            id="clearHistorial"
+            class="border-4 border-solid bg-slate-400"
+          >
+            Collapse historial
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="historialCartel" class="text-[15px]"></div>
     <!-- calculadora -->
   </body>
 </html>
