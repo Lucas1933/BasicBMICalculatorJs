@@ -7,23 +7,51 @@
       content="user-scalable=no, width=device-width, initial-scale=1"
     />
     <link rel="stylesheet" href="../dist/output.css" />
-    <script defer src="../js/calculadoraScript.js"></script>
+
     <title>Calculadora de calorias</title>
   </head>
   <body
     class="flex h-screen flex-col items-center justify-center overflow-x-hidden lg:flex-row"
   >
     <!-- cartel del resultado -->
-    <div
-      class="ml-10 mr-4 flex hidden h-48 w-96 flex-col items-center justify-center bg-slate-500 lg:h-fit lg:w-[20%]"
-    >
-      <p class="inline-block text-center text-sm font-bold text-white"></p>
-      <p
-        id="resultadoText"
-        class="text-center text-lg font-bold text-white"
-      ></p>
+    <div class="lg:flex lg:flex-col">
+      <div class="lg:flex lg:justify-center">Resultado</div>
+      <div
+        id="cartelResultado"
+        class="ml-10 mr-4 flex h-48 w-96 flex-col items-center justify-center bg-slate-500 lg:m-0"
+      >
+        <p class="inline-block text-center text-sm font-bold text-white"></p>
+        <p
+          id="resultadoText"
+          class="text-center text-lg font-bold text-white"
+        ></p>
+      </div>
+      <div class="lg:mt-3 lg:flex lg:flex-col">
+        <p class="lg:ml-4 lg:mb-4">Historial</p>
+        <div class="flex flex-col lg:flex-row">
+          <div>
+            <button id="clean" class="mb-3 w-8">
+              <img src="../assets/icons/trash-svgrepo-com.svg" alt="" />
+            </button>
+          </div>
+
+          <div>
+            <button id="historial" class="mx-6 w-8">
+              <img
+                id="historialIcon"
+                src="../assets/icons/toggle-expand-all-svgrepo-com.svg"
+                alt=""
+              />
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="historialCartel"
+          class="invisible border-4 border-solid border-black text-[15px] lg:h-32 lg:overflow-y-scroll"
+        ></div>
+      </div>
     </div>
-    <!-- cartel del resultado -->
 
     <!-- calculadora -->
     <div
@@ -231,25 +259,7 @@
       </form>
     </div>
 
-    <div class="lg:flex lg:flex-col">
-      <div class="flex flex-col">
-        <button id="clean" class="mb-8 border-4 border-solid bg-slate-400">
-          Clean local storage
-        </button>
-        <div>
-          <button id="historial" class="border-4 border-solid bg-slate-400">
-            Historial
-          </button>
-          <button
-            id="clearHistorial"
-            class="border-4 border-solid bg-slate-400"
-          >
-            Collapse historial
-          </button>
-        </div>
-      </div>
-    </div>
-    <div id="historialCartel" class="text-[15px]"></div>
     <!-- calculadora -->
+    <script src="../js/calculadoraScript.js"></script>
   </body>
 </html>

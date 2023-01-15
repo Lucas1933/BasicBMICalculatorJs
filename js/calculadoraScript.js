@@ -164,6 +164,7 @@ function setNivelDeActividadBotonAnimation(etiquetaSeleccionada) {
 /* Calculo*/
 const botonCalcular = document.getElementById("calcularBoton");
 botonCalcular.addEventListener("click", main);
+botonCalcular.addEventListener("click", print);
 function main() {
   let persona = new Persona();
   const calculadora = new CalculadoraMetabolica();
@@ -177,14 +178,13 @@ function main() {
  */
 function appendResult(resultado) {
   if (!isNaN(resultado)) {
-    let cartelResultado = document.body.querySelector("div:first-child");
+    let cartelResultado = document.getElementById("cartelResultado");
     let caloriasQuemadasPorDia = cartelResultado.firstElementChild;
     let resultadoText = cartelResultado.lastElementChild;
     resultadoText.style.color = "white";
 
     caloriasQuemadasPorDia.innerText = "Calorias quemadas por dia:";
     resultadoText.innerText = parseInt(resultado) + " Kl";
-    cartelResultado.classList.remove("hidden");
   } else {
     appendDatoinvalido();
   }
@@ -196,15 +196,12 @@ function appendResult(resultado) {
  * @return {void}
  */
 function appendDatoinvalido() {
-  const cartelResultado = document.body.querySelector(
-    "div:first-child" /* primer hijo del body, el div que es el cartel con el resultado */
-  );
+  const cartelResultado = document.getElementById("cartelResultado");
   const caloriasQuemadasPorDia = cartelResultado.firstElementChild;
   const resultadoText = cartelResultado.lastElementChild;
   caloriasQuemadasPorDia.innerText = " ";
   resultadoText.style.color = "#FF4747";
   resultadoText.innerText = "Uno de los valores ingresados es invalido";
-  cartelResultado.classList.remove("hidden");
 }
 function setHistorialDeCalculos(persona) {
   localStorage.setItem(persona.id, JSON.stringify(persona));
@@ -237,13 +234,32 @@ function cerrarCuadroDeDialogo(event) {
 
 document.getElementById("clean").addEventListener("click", () => {
   localStorage.clear();
+  print();
 });
 
-document.getElementById("historial").addEventListener("click", print);
-document.getElementById("clearHistorial").addEventListener("click", () => {
-  document.getElementById("historialCartel").innerText = " ";
-});
+const botonDesplegarHistorial = document.getElementById("historial");
+const btnImg = document.getElementById("historialIcon");
+const historialCartel = document.getElementById("historialCartel");
 
+botonDesplegarHistorial.addEventListener("click", print);
+botonDesplegarHistorial.addEventListener("click", () => {
+  let activeClass =
+    botonDesplegarHistorial.classList[
+      botonDesplegarHistorial.classList.length - 1
+    ];
+  let iconoExpand = "../assets/icons/toggle-expand-all-svgrepo-com.svg";
+  let iconoCollapse = "../assets/icons/toggle-collapse-all-svgrepo-com.svg";
+
+  if (activeClass == "active") {
+    botonDesplegarHistorial.classList.remove("active");
+    historialCartel.classList.add("invisible");
+    btnImg.src = iconoExpand;
+  } else {
+    botonDesplegarHistorial.classList.add("active");
+    historialCartel.classList.remove("invisible");
+    btnImg.src = iconoCollapse;
+  }
+});
 function print() {
   let calculadora = new CalculadoraMetabolica();
   const historialDiv = document.getElementById("historialCartel");
@@ -251,23 +267,26 @@ function print() {
   for (let i = 1; i < localStorage.length; i++) {
     let cadaPersona = JSON.parse(localStorage.getItem(i));
     if (calculadora.validateValues(cadaPersona)) {
-      historialDiv.innerText +=
+      historialDiv.innerHTML +=
+        '<div class= "border-solid border-[1px] border-black" >' +
         "Peso: " +
         cadaPersona.peso +
-        "\n" +
+        "<br>" +
         "Altura: " +
         cadaPersona.altura +
-        "\n" +
+        "<br>" +
         "Edad: " +
         cadaPersona.edad +
-        "\n" +
+        "<br>" +
         "Sexo: " +
         cadaPersona.sexo +
-        "\n" +
+        "<br>" +
+        "Fecha: " +
+        cadaPersona.fecha +
+        "<br>" +
         "ID: " +
         cadaPersona.id +
-        "\n" +
-        "\n";
+        "</div>";
     }
   }
 }
