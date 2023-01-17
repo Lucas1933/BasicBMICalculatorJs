@@ -39,27 +39,21 @@ export function print() {
   historialDiv.innerText = " ";
   for (let i = 1; i < localStorage.length; i++) {
     let cadaPersona = JSON.parse(localStorage.getItem(i));
+    const { peso, altura, edad, sexo, _ignore, fecha, id } = cadaPersona;
     if (calculadora.validateValues(cadaPersona)) {
-      historialDiv.innerHTML +=
-        '<div class= "border-solid border-[1px] border-black" >' +
-        "Peso: " +
-        cadaPersona.peso +
-        "<br>" +
-        "Altura: " +
-        cadaPersona.altura +
-        "<br>" +
-        "Edad: " +
-        cadaPersona.edad +
-        "<br>" +
-        "Sexo: " +
-        cadaPersona.sexo +
-        "<br>" +
-        "Fecha: " +
-        cadaPersona.fecha +
-        "<br>" +
-        "ID: " +
-        cadaPersona.id +
-        "</div>";
+      historialDiv.innerHTML += `<div class= "border-solid border-[1px] border-black" >
+        Peso: ${peso} 
+        <br> 
+        Altura: ${altura} 
+        <br> 
+        Edad: ${edad} 
+        <br> 
+        Sexo: ${sexo} 
+        <br> 
+        Fecha: ${fecha} 
+        <br>
+        ID: ${id} 
+        </div>`;
     }
   }
 }

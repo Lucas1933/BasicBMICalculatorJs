@@ -10,31 +10,33 @@ export class CalculadoraMetabolica {
      mujeres: (10 × peso en kg) + (6,25 x altura en cm) - (5 × edad en años) - 161
    */
   obtenerCalorias(persona) {
+    let { peso, altura, edad, sexo, nivelDeActividad } = persona;
     let resultado;
     if (this.validateValues(persona)) {
       let valorPorSexo = 5;
-      if (persona.sexo === "femenino") {
+      if (sexo === "femenino") {
         valorPorSexo = -161;
       }
       resultado =
-        10 * parseInt(persona.peso) +
-        6.25 * parseInt(persona.altura) -
-        5 * parseInt(persona.edad) +
+        10 * parseInt(peso) +
+        6.25 * parseInt(altura) -
+        5 * parseInt(edad) +
         valorPorSexo;
     } else {
       resultado = NaN;
     }
-    return resultado * parseFloat(persona.nivelDeActividad);
+    return resultado * parseFloat(nivelDeActividad);
   }
 
   validateValues(persona) {
+    let { peso, altura, edad } = persona;
     if (
-      isNaN(persona.peso) ||
-      isNaN(persona.altura) ||
-      isNaN(persona.edad) ||
-      persona.peso <= 0 ||
-      persona.altura <= 0 ||
-      persona.edad <= 0
+      isNaN(peso) ||
+      isNaN(altura) ||
+      isNaN(edad) ||
+      peso <= 0 ||
+      altura <= 0 ||
+      edad <= 0
     ) {
       return false;
     } else {
