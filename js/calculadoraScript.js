@@ -178,13 +178,12 @@ function main() {
  */
 function appendResult(resultado) {
   if (!isNaN(resultado)) {
-    let cartelResultado = document.getElementById("cartelResultado");
-    let caloriasQuemadasPorDia = cartelResultado.firstElementChild;
-    let resultadoText = cartelResultado.lastElementChild;
+    let resultadoText = document.getElementById("resultadoText");
+    let fuegosIcon = document.querySelectorAll(".fuego");
+    fuegosIcon[0].classList.remove("hidden");
+    fuegosIcon[1].classList.remove("hidden");
     resultadoText.style.color = "white";
-
-    caloriasQuemadasPorDia.innerText = "Calorias quemadas por dia:";
-    resultadoText.innerText = parseInt(resultado) + " Kl";
+    resultadoText.innerText = parseInt(resultado);
   } else {
     appendDatoinvalido();
   }
@@ -196,10 +195,10 @@ function appendResult(resultado) {
  * @return {void}
  */
 function appendDatoinvalido() {
-  const cartelResultado = document.getElementById("cartelResultado");
-  const caloriasQuemadasPorDia = cartelResultado.firstElementChild;
-  const resultadoText = cartelResultado.lastElementChild;
-  caloriasQuemadasPorDia.innerText = " ";
+  const resultadoText = document.getElementById("resultadoText");
+  let fuegosIcon = document.querySelectorAll(".fuego");
+  fuegosIcon[0].classList.add("hidden");
+  fuegosIcon[1].classList.add("hidden");
   resultadoText.style.color = "#FF4747";
   resultadoText.innerText = "Uno de los valores ingresados es invalido";
 }

@@ -11,52 +11,72 @@
     <title>Calculadora de calorias</title>
   </head>
   <body
-    class="flex h-screen flex-col items-center justify-center overflow-x-hidden lg:flex-row"
+    class="flex h-screen flex-col-reverse items-center justify-end overflow-x-hidden lg:flex-row lg:justify-center"
   >
     <!-- cartel del resultado -->
-    <div class="lg:flex lg:flex-col">
-      <div class="lg:flex lg:justify-center">Resultado</div>
+    <div class="flex flex-col items-center justify-center lg:flex lg:flex-col">
       <div
         id="cartelResultado"
-        class="ml-10 mr-4 flex h-48 w-96 flex-col items-center justify-center bg-slate-500 lg:m-0"
+        class="mt-10 flex h-[20vh] w-[30vh] flex-col items-center justify-center rounded-lg bg-black lg:m-0"
       >
-        <p class="inline-block text-center text-sm font-bold text-white"></p>
-        <p
-          id="resultadoText"
-          class="text-center text-lg font-bold text-white"
-        ></p>
-      </div>
-      <div class="lg:mt-3 lg:flex lg:flex-col">
-        <p class="lg:ml-4 lg:mb-4">Historial</p>
-        <div class="flex flex-col lg:flex-row">
-          <div>
-            <button id="clean" class="mb-3 w-8">
-              <img src="../assets/icons/trash-svgrepo-com.svg" alt="" />
-            </button>
+        <div class="flex flex-shrink justify-center">
+          <div class="flex flex-col justify-center">
+            <img
+              class="fuego mr-4 hidden h-[32px] w-[32px] scale-x-[-1]"
+              src="../assets/icons/fire-svgrepo-com.webp"
+              alt=""
+            />
           </div>
 
-          <div>
-            <button id="historial" class="mx-6 w-8">
-              <img
-                id="historialIcon"
-                src="../assets/icons/toggle-expand-all-svgrepo-com.svg"
-                alt=""
-              />
-            </button>
+          <p
+            id="resultadoText"
+            class="text-center font-mono text-lg font-bold text-white"
+          >
+            Calorias quemadas por dia
+          </p>
+          <div class="flex flex-col justify-center">
+            <img
+              class="fuego ml-4 hidden h-[32px] w-[32px]"
+              src="../assets/icons/fire-svgrepo-com.webp"
+              alt=""
+            />
           </div>
         </div>
+      </div>
+      <div
+        class="flex flex-col items-center justify-center lg:mt-3 lg:flex lg:flex-col"
+      >
+        <p class="ml-32 lg:ml-4 lg:mb-4">Historial</p>
+        <div class="flex justify-evenly">
+          <div class="flex lg:flex-row">
+            <div class="w-fit">
+              <button id="clean" class="mb-3 w-8">
+                <img src="../assets/icons/trash-svgrepo-com.svg" alt="" />
+              </button>
+            </div>
 
-        <div
-          id="historialCartel"
-          class="invisible border-4 border-solid border-black text-[15px] lg:h-32 lg:overflow-y-scroll"
-        ></div>
+            <div class="w-fit">
+              <button id="historial" class="mx-6 w-8">
+                <img
+                  id="historialIcon"
+                  src="../assets/icons/toggle-expand-all-svgrepo-com.svg"
+                  alt=""
+                />
+              </button>
+            </div>
+          </div>
+          <div
+            id="historialCartel"
+            class="invisible mb-10 h-[20vh] w-[20vh] overflow-y-scroll border-4 border-solid border-black text-[15px] lg:h-32 lg:overflow-y-scroll"
+          ></div>
+        </div>
       </div>
     </div>
 
     <!-- calculadora -->
     <div
       id="calculadoraDiv"
-      class="calculadora mr-3 ml-3 flex w-[30%] justify-center rounded-lg border-8 border-solid border-black"
+      class="calculadora mx-3 mt-10 rounded-lg border-8 border-solid border-black lg:mr-3 lg:ml-3 lg:flex lg:w-[30%] lg:justify-center"
     >
       <div
         class="absolute top-0 bottom-0 z-10 flex hidden h-[%100] w-[%100] flex-col-reverse justify-center bg-transparent pl-5 pr-5"
@@ -261,5 +281,7 @@
 
     <!-- calculadora -->
     <script src="../js/calculadoraScript.js"></script>
+    <script type="module" src="../js/calculadoraScriptcopy.js"></script>
+    <script src="[![](https://data.jsdelivr.com/v1/package/npm/svelte-agnostic-draggable/badge)](https://www.jsdelivr.com/package/npm/svelte-agnostic-draggable)"></script>
   </body>
 </html>
