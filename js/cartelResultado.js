@@ -9,6 +9,7 @@ export function appendResult(resultado) {
     fuegosIcon[0].classList.remove("hidden");
     fuegosIcon[1].classList.remove("hidden");
     resultadoText.style.color = "white";
+    resultadoText.style.fontSize = "30px";
     resultadoText.innerText = parseInt(resultado);
   } else {
     appendDatoinvalido();
@@ -24,5 +25,6 @@ function appendDatoinvalido() {
   fuegosIcon[0].classList.add("hidden");
   fuegosIcon[1].classList.add("hidden");
   resultadoText.style.color = "#FF4747"; /* rojo error je */
+  resultadoText.style.fontSize = "20px";
   resultadoText.innerText = "Uno de los valores ingresados es invalido";
 }
