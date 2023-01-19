@@ -1,6 +1,11 @@
 /* seleccion y animacion de niveles de actividad listeners */
 const inputsNivelDeActividad = document.getElementsByName("nivelDeActividad");
-export let nivelDeActividad;
+const etiquetas = document
+  .getElementById("nivelDeActividadDiv")
+  .querySelectorAll("label:nth-child(odd)");
+/* valores iniciales para evitar errores si se presiona calcular sin ingresar nada */
+etiquetas[0].style.borderColor = "#2196F3";
+export let nivelDeActividad = 1.2;
 
 export function setInputActividadListener() {
   inputsNivelDeActividad.forEach((boton) => {
@@ -24,9 +29,6 @@ function setNivelDeActividad(event) {
  * @return {void}.
  */
 function setNivelDeActividadBotonEstilo(event) {
-  const etiquetas = document
-    .getElementById("nivelDeActividadDiv")
-    .querySelectorAll("label:nth-child(odd)");
   for (let i = 0; i < etiquetas.length; i++) {
     if (etiquetas[i].htmlFor === event.target.id) {
       etiquetas.forEach((cadaEtiqueta) => {
@@ -42,7 +44,7 @@ function setNivelDeActividadBotonEstilo(event) {
  * Añado un listener que espera a que la animacion termine para remover la animacion (class)
  * esto permite que se pueda volver a disparar la animacion al seleccionar nuevamente
  * la misma etiqueta.
- * @param {Parameter} etiquetaSeleccionada la etiqueta que fue clickeada.
+ * @param {Parameter} etiquetaSeleccionada
  * @return {void}.
  */
 function setNivelDeActividadBotonAnimation(etiquetaSeleccionada) {

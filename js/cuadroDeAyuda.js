@@ -7,7 +7,8 @@ export function setCuadroDeAyudaListeners() {
 }
 
 let cuadroDeDialogoNdeActividad =
-  iconoDeCierre.parentNode.parentNode.parentNode.parentNode;
+  iconoDeCierre.parentNode.parentNode.parentNode
+    .parentNode; /* jugando con los nodos, era mas facil un ID */
 /**
  *remueve la class hidden del cuadro de dialogo
  *con la informacion acerca de los niveles de actividad
