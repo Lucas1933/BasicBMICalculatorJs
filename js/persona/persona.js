@@ -43,18 +43,16 @@ export function crearPersona() {
     }),
     id: getId(),
   };
-  localStorage.setItem(id, persona);
-  console.log("ID: " + id);
+  localStorage.setItem(persona.id, persona);
   return persona;
 }
 function getId() {
-  let aux = 1;
-  if (localStorage.getItem(acumulador) > 1) {
-    aux = localStorage.getItem(acumulador);
-    aux++;
-    localStorage.setItem(acumulador, aux);
+  if (localStorage.getItem("acumulador") == null) {
+    localStorage.setItem("acumulador", 1);
   } else {
-    localStorage.setItem(acumulador, aux);
+    let aux = localStorage.getItem("acumulador");
+    aux++;
+    localStorage.setItem("acumulador", aux);
   }
-  return localStorage.getItem(acumulador);
+  return localStorage.getItem("acumulador");
 }
