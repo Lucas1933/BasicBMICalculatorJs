@@ -2,7 +2,8 @@
 const iconoDeAyuda = document.getElementById("helpIcon");
 const iconoDeCierre = document.getElementById("closeIcon");
 const cuadroDeDialogo = document.getElementById("cuadroDeAyuda");
-export function setCuadroDeAyudaListeners() {
+
+export function setCartelAyudaListeners() {
   iconoDeAyuda.addEventListener("click", abrirCuadroDeDialogo);
   iconoDeCierre.addEventListener("click", cerrarCuadroDeDialogo);
 }
