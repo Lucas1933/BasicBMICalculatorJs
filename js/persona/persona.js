@@ -1,5 +1,6 @@
 import { sexoSeleccionado } from "./sex.js";
 import { nivelDeActividadSeleccionado } from "./actividad.js";
+
 function validarValores(peso, altura, edad) {
   if (
     isNaN(peso) ||
@@ -40,7 +41,22 @@ export function crearPersona() {
       hour: "2-digit",
       minute: "2-digit",
     }),
-    id: 1,
+    id: getId(),
   };
+  localStorage.setItem(id, persona);
+  console.log("ID: " + id);
   return persona;
+}
+function getId() {
+  localStorage.setItem(acumulador);
+  localStorage.getItem(acumulador);
+
+  if (localStorage.getItem(acumulador) != 1) {
+    let aux = localStorage.getItem(acumulador);
+    aux++;
+    localStorage.setItem(acumulador, aux);
+  } else {
+    localStorage.setItem(acumulador, 1);
+  }
+  return localStorage.getItem(acumulador);
 }
