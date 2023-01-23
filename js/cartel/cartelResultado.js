@@ -1,24 +1,36 @@
 import { getCalorias } from "../calculadora/calculadora.js";
-let resultadoText = document.getElementById("resultadoText");
-const fuegosIcon = document.querySelectorAll(".fuego");
-export function appendResult() {
+const cartelResultado = document.getElementById("cartelResultado");
+export function showResult() {
   let resultado = getCalorias();
   if (resultado == 0) {
     appendDatoinvalido();
   } else {
-    resultado = parseInt(resultado);
-    fuegosIcon[0].classList.remove("hidden");
-    fuegosIcon[1].classList.remove("hidden");
-    resultadoText.style.color = "white";
-    resultadoText.style.fontSize = "30px";
-    resultadoText.innerText = resultado;
+    appendResult(resultado);
   }
 }
+function appendResult(resultado) {
+  cartelResultado.innerHTML = `<div class="flex flex-shrink justify-center">
+  <div class="flex flex-col justify-center">
+    <img
+      class="fuego mr-4  h-[32px] w-[32px] scale-x-[-1]"
+      src="../assets/icons/fire-svgrepo-com.webp"
+      alt=""
+    />
+  </div>
 
+  <p class="text-white text-center font-mono text-lg font-bold text-[30px]">${resultado}</p>
+
+  <div class="flex flex-col justify-center">
+    <img
+      class="fuego ml-4 h-[32px] w-[32px]"
+      src="../assets/icons/fire-svgrepo-com.webp"
+      alt=""
+    />
+  </div>
+</div>`;
+}
 function appendDatoinvalido() {
-  fuegosIcon[0].classList.add("hidden");
-  fuegosIcon[1].classList.add("hidden");
-  resultadoText.style.color = "#FF4747";
-  resultadoText.style.fontSize = "20px";
-  resultadoText.innerText = "Uno de los valores ingresados es invalido";
+  cartelResultado.innerHTML = `<div class="flex flex-shrink justify-center">
+  <p class="text-center text-[20px] font-mono text-lg font-bold text-[#ff0000]">Uno de los datos ingresados es invalido</p>
+  </div>`;
 }

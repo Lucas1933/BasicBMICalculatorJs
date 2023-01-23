@@ -16,5 +16,6 @@ export function getCalorias() {
      mujeres: (10 × peso en kg) + (6,25 x altura en cm) - (5 × edad en años) - 161
    */
   resultado = 10 * peso + 6.25 * altura - 5 * edad + valorPorSexo;
-  return resultado * nivelDeActividad;
+  resultado = resultado * nivelDeActividad;
+  return parseInt(resultado);
 }
