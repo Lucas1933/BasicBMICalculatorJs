@@ -48,15 +48,13 @@ export function crearPersona() {
   return persona;
 }
 function getId() {
-  localStorage.setItem(acumulador);
-  localStorage.getItem(acumulador);
-
-  if (localStorage.getItem(acumulador) != 1) {
-    let aux = localStorage.getItem(acumulador);
+  let aux = 1;
+  if (localStorage.getItem(acumulador) > 1) {
+    aux = localStorage.getItem(acumulador);
     aux++;
     localStorage.setItem(acumulador, aux);
   } else {
-    localStorage.setItem(acumulador, 1);
+    localStorage.setItem(acumulador, aux);
   }
   return localStorage.getItem(acumulador);
 }

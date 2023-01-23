@@ -591,6 +591,10 @@ video {
   margin-left: 1rem;
 }
 
+.ml-32 {
+  margin-left: 8rem;
+}
+
 .block {
   display: block;
 }
@@ -686,6 +690,10 @@ video {
 
 .w-\[32px\] {
   width: 32px;
+}
+
+.w-\[20vh\] {
+  width: 20vh;
 }
 
 .flex-shrink {
@@ -937,6 +945,14 @@ video {
 
   .lg\:ml-3 {
     margin-left: 0.75rem;
+  }
+
+  .lg\:ml-4 {
+    margin-left: 1rem;
+  }
+
+  .lg\:mb-4 {
+    margin-bottom: 1rem;
   }
 
   .lg\:flex {
