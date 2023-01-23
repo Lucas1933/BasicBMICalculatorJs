@@ -1,4 +1,5 @@
 import { showResult } from "./cartel/cartelResultado.js";
+import { printHistorial } from "./historial/historial.js";
 import { setCuadroDeAyudaListeners } from "./cartel/cartelAyuda.js";
 setCuadroDeAyudaListeners();
 
@@ -7,4 +8,5 @@ btnCalcular.addEventListener("click", exeCalculo);
 
 function exeCalculo() {
   showResult();
+  printHistorial();
 }

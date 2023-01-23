@@ -43,7 +43,7 @@ export function crearPersona() {
     }),
     id: getId(),
   };
-  localStorage.setItem(persona.id, persona);
+  storePersona(persona);
   return persona;
 }
 function getId() {
@@ -55,4 +55,7 @@ function getId() {
     localStorage.setItem("acumulador", aux);
   }
   return localStorage.getItem("acumulador");
+}
+function storePersona(persona) {
+  localStorage.setItem(persona.id, JSON.stringify(persona));
 }

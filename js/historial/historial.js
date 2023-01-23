@@ -1,55 +1,43 @@
-const botonDesplegarHistorial = document.getElementById("historial");
-const btnImg = document.getElementById("historialIcon");
-const historialCartel = document.getElementById("historialCartel");
-const btnEliminarHistorial = document.getElementById("clean");
+const desplegarBtn = document.getElementById("desplegarHistorial");
+const cleanBtn = document.getElementById("cleanHistorial");
 const historialDiv = document.getElementById("historialCartel");
-export function setHistorialDeCalculos(persona) {
-  localStorage.setItem(persona.id, JSON.stringify(persona));
+const expandIcon = "../../assets/icons/toggle-expand-all-svgrepo-com.svg";
+const collapseIcon = "../../assets/icons/toggle-collapse-all-svgrepo-com.svg";
+desplegarBtn.addEventListener("click", desplegarHistorial);
+cleanBtn.addEventListener("click", clearHistorial);
+function desplegarHistorial() {
+  if (historialDiv.classList.contains("invisible")) {
+    printHistorial();
+    historialDiv.classList.remove("invisible");
+    desplegarBtn.firstElementChild.src = collapseIcon;
+  } else {
+    historialDiv.classList.add("invisible");
+    desplegarBtn.firstElementChild.src = expandIcon;
+  }
 }
-
-export function setHistorialListeners() {
-  botonDesplegarHistorial.addEventListener("click", print);
-  btnEliminarHistorial.addEventListener("click", () => {
-    localStorage.clear();
-    print();
-  });
-  botonDesplegarHistorial.addEventListener("click", () => {
-    let activeClass =
-      botonDesplegarHistorial.classList[
-        botonDesplegarHistorial.classList.length - 1
-      ];
-    let iconoExpand = "../assets/icons/toggle-expand-all-svgrepo-com.svg";
-    let iconoCollapse = "../assets/icons/toggle-collapse-all-svgrepo-com.svg";
-
-    if (activeClass == "active") {
-      botonDesplegarHistorial.classList.remove("active");
-      historialCartel.classList.add("invisible");
-      btnImg.src = iconoExpand;
-    } else {
-      botonDesplegarHistorial.classList.add("active");
-      historialCartel.classList.remove("invisible");
-      btnImg.src = iconoCollapse;
-    }
-  });
+function clearHistorial() {
+  localStorage.clear();
+  historialDiv.innerHTML = " ";
 }
-
-export function print() {
-  historialDiv.innerText = " ";
+export function printHistorial() {
+  historialDiv.innerHTML = " ";
   for (let i = 1; i < localStorage.length; i++) {
-    let cadaPersona = JSON.parse(localStorage.getItem(i));
-    const { peso, altura, edad, sexo, _ignore, fecha, id } = cadaPersona;
-    historialDiv.innerHTML += `<div class= "border-solid border-[1px] border-black" >
-        Peso: ${peso} 
-        <br> 
-        Altura: ${altura} 
-        <br> 
-        Edad: ${edad} 
-        <br> 
-        Sexo: ${sexo} 
-        <br> 
-        Fecha: ${fecha} 
-        <br>
-        ID: ${id} 
-        </div>`;
+    let persona = JSON.parse(localStorage.getItem(i));
+    let { peso, altura, edad, sexo, _ignore, fecha, id } = persona;
+    historialDiv.innerHTML += `<div class="border-solid border-black border-2">Peso: ${peso} 
+      <br> 
+      Altura: ${altura} 
+      <br> 
+      Edad: ${edad} 
+      <br>
+      Sexo: ${sexo} 
+      <br>
+      Nivel de actividad: ${persona.nivelDeActividad} 
+      <br>
+      Fecha: ${fecha} 
+      <br>
+      ID: ${id} 
+      <br>
+      </div>`;
   }
 }
