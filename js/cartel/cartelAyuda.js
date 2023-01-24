@@ -15,3 +15,4 @@ function abrirCuadroDeDialogo(event) {
 function cerrarCuadroDeDialogo(event) {
   cuadroDeDialogo.classList.add("hidden");
 }
+setCartelAyudaListeners();

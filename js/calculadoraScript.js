@@ -1,6 +1,7 @@
 import { showResult } from "./cartel/cartelResultado.js";
 import { printHistorial } from "./historial/historial.js";
 import { setCartelAyudaListeners } from "./cartel/cartelAyuda.js";
+
 const btnCalcular = document.getElementById("calcularBoton");
 btnCalcular.addEventListener("click", exeCalculo);
 

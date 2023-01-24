@@ -101,13 +101,26 @@
         class="flex flex-col items-center justify-center font-medium"
         action=""
       >
-        <label for="peso" class="mt-5"> Peso en Kg</label>
+        <label for="peso" class="mt-5">Peso</label>
+        <div class="flex">
+          <label for="kg" class="ml-4">kg</label>
+          <input type="checkbox" id="kg" class="mx-4" />
+          <label for="lb">lb</label>
+          <input type="checkbox" id="lb" class="mx-4" />
+        </div>
+
         <input
           class="w-32 rounded-lg border-2 border-solid border-black"
           id="peso"
           type="text"
         />
-        <label for="altura" class="mt-5">Altura en cm</label>
+        <label for="altura" class="">Altura</label>
+        <div class="flex">
+          <label for="cm" class="ml-4">cm</label>
+          <input type="checkbox" id="cm" class="mx-4" />
+          <label for="ft">ft</label>
+          <input type="checkbox" id="ft" class="mx-4" />
+        </div>
         <input
           class="w-32 rounded-lg border-2 border-solid border-black"
           id="altura"

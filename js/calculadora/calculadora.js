@@ -1,5 +1,7 @@
 import { crearPersona } from "../persona/persona.js";
-
+import { unidadDeMasaSeleccionada } from "../inputs/unidadMasa.js";
+import { unidadDeAlturaSeleccionada } from "../inputs/unidadAltura.js";
+import convert from "https://cdn.jsdelivr.net/npm/convert@4";
 export function getCalorias() {
   let persona = crearPersona();
   if (persona == null) {
@@ -15,6 +17,16 @@ export function getCalorias() {
      hombres: (10 x peso en kg) + (6,25 x altura en cm) - (5 x edad en años) + 5
      mujeres: (10 × peso en kg) + (6,25 x altura en cm) - (5 × edad en años) - 161
    */
+
+  if (unidadDeMasaSeleccionada != "kg") {
+    peso = parseFloat(peso);
+    peso = convert(peso, "pounds").to("kilograms");
+  }
+
+  if (unidadDeAlturaSeleccionada != "cm") {
+    altura = parseFloat(altura);
+    altura = convert(altura, "feet").to("centimeters");
+  }
   resultado = 10 * peso + 6.25 * altura - 5 * edad + valorPorSexo;
   resultado = resultado * nivelDeActividad;
   return parseInt(resultado);

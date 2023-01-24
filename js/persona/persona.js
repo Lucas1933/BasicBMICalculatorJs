@@ -1,5 +1,5 @@
-import { sexoSeleccionado } from "./sex.js";
-import { nivelDeActividadSeleccionado } from "./actividad.js";
+import { sexoSeleccionado } from "../inputs/sex.js";
+import { nivelDeActividadSeleccionado } from "../inputs/actividad.js";
 
 function validarValores(peso, altura, edad) {
   if (

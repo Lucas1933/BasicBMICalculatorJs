@@ -1,3 +1,5 @@
+import { unidadDeMasaSeleccionada } from "../inputs/unidadMasa.js";
+import { unidadDeAlturaSeleccionada } from "../inputs/unidadAltura.js";
 const desplegarBtn = document.getElementById("desplegarHistorial");
 const cleanBtn = document.getElementById("cleanHistorial");
 const historialDiv = document.getElementById("historialCartel");
@@ -24,9 +26,10 @@ export function printHistorial() {
   for (let i = 1; i < localStorage.length; i++) {
     let persona = JSON.parse(localStorage.getItem(i));
     let { peso, altura, edad, sexo, _ignore, fecha, id } = persona;
-    historialDiv.innerHTML += `<div class="border-solid border-black border-2">Peso: ${peso} 
+    historialDiv.innerHTML += `<div class="border-solid border-black border-2">
+    Peso: ${peso} ${unidadDeMasaSeleccionada} 
       <br> 
-      Altura: ${altura} 
+      Altura: ${altura} ${unidadDeAlturaSeleccionada}  
       <br> 
       Edad: ${edad} 
       <br>
