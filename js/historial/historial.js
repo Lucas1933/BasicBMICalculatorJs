@@ -3,8 +3,8 @@ import { unidadDeAlturaSeleccionada } from "../inputs/unidadAltura.js";
 const desplegarBtn = document.getElementById("desplegarHistorial");
 const cleanBtn = document.getElementById("cleanHistorial");
 const historialDiv = document.getElementById("historialCartel");
-const expandIcon = "../../assets/icons/toggle-expand-all-svgrepo-com.svg";
-const collapseIcon = "../../assets/icons/toggle-collapse-all-svgrepo-com.svg";
+const expandIcon = "../assets/icons/toggle-expand-all-svgrepo-com.svg";
+const collapseIcon = "../assets/icons/toggle-collapse-all-svgrepo-com.svg";
 desplegarBtn.addEventListener("click", desplegarHistorial);
 cleanBtn.addEventListener("click", clearHistorial);
 function desplegarHistorial() {
