@@ -11,6 +11,7 @@ function desplegarHistorial() {
   if (historialDiv.classList.contains("invisible")) {
     printHistorial();
     historialDiv.classList.remove("invisible");
+    desplegarBtn.firstElementChild.src = " ";
     desplegarBtn.firstElementChild.src = collapseIcon;
   } else {
     historialDiv.classList.add("invisible");
