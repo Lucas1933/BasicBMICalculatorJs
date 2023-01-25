@@ -21,6 +21,7 @@ function setNivelDeActividad(event) {
 }
 
 function setNivelDeActividadBotonEstilo(event) {
+  console.log("first");
   for (let i = 0; i < etiquetas.length; i++) {
     if (etiquetas[i].htmlFor === event.target.id) {
       etiquetas.forEach((cadaEtiqueta) => {
