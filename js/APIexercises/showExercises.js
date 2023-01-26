@@ -57,7 +57,7 @@ export async function showExercises() {
       <li>${piernas[randomIndex].name}</li>
     </ul>
   </div>
-  <div>
+  <div class="ml-8">
     <p>Perder grasa</p>
     <ul>
       <li>${cardio[randomIndex].name}</li>
