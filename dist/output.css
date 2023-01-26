@@ -640,6 +640,18 @@ video {
   height: 32px;
 }
 
+.h-4 {
+  height: 1rem;
+}
+
+.h-8 {
+  height: 2rem;
+}
+
+.h-12 {
+  height: 3rem;
+}
+
 .w-\[30vh\] {
   width: 30vh;
 }
@@ -693,6 +705,14 @@ video {
   width: 32px;
 }
 
+.w-4 {
+  width: 1rem;
+}
+
+.w-12 {
+  width: 3rem;
+}
+
 .flex-shrink {
   flex-shrink: 1;
 }
@@ -711,6 +731,16 @@ video {
 
 .animate-pingOnce {
   animation: ping 0.3s;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
 }
 
 .select-none {

@@ -34,6 +34,7 @@ async function fetchExercises() {
 }
 
 export async function showExercises() {
+  loadingExercises();
   let ejercicios = [];
   ejercicios = await fetchExercises();
   let cardio = ejercicios.pop();
@@ -46,6 +47,7 @@ export async function showExercises() {
   let div = document.getElementById("ejercicios");
   div.classList.add("flex", "grow", "w-[%35]", "justify-evenly");
   div.innerHTML = " ";
+  hideLoading();
   div.innerHTML = ` 
   <div>
     <p>Ganar musculo</p>
@@ -64,4 +66,19 @@ export async function showExercises() {
     </ul>
   </div>
 `;
+}
+
+function loadingExercises() {
+  let divLoading = document.getElementById("loading");
+  divLoading.classList.add("flex", "flex-col", "items-center");
+  divLoading.innerHTML = `<p>Cargando ejercicios</p>
+  <img
+    class="h-12 w-12 animate-spin"
+    src="../assets/icons/loading-spinner-svgrepo-com.svg"
+    alt=""
+  /> `;
+}
+function hideLoading() {
+  let divLoading = document.getElementById("loading");
+  divLoading.classList.add("hidden");
 }
