@@ -74,7 +74,7 @@ function loadingExercises() {
   divLoading.innerHTML = `<p>Cargando ejercicios</p>
   <img
     class="h-12 w-12 animate-spin"
-    src=".../assets/icons/loading-spinner-svgrepo-com.svg"
+    src="../assets/icons/loading-spinner-svgrepo-com.svg"
     alt=""
   /> `;
 }
