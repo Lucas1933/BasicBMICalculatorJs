@@ -6,7 +6,8 @@ setCartelAyudaListeners();
 const btnCalcular = document.getElementById("calcularBoton");
 btnCalcular.addEventListener("click", exeCalculo);
 function exeCalculo() {
-  showResult();
+  if (showResult()) {
+    showExercises();
+  }
   printHistorial();
-  showExercises();
 }

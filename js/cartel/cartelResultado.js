@@ -4,8 +4,10 @@ export function showResult() {
   let resultado = getCalorias();
   if (resultado == 0) {
     appendDatoinvalido();
+    return false;
   } else {
     appendResult(resultado);
+    return true;
   }
 }
 function appendResult(resultado) {
